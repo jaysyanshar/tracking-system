@@ -1,0 +1,75 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "apiVersion": "2021-09-01",
+      "name": "teleport-demo-group",
+      "location": "southeastasia",
+      "properties": {
+        "containers": [
+          {
+            "name": "app",
+            "properties": {
+              "image": "jaysyanshar/teleport-tracking:latest",
+              "resources": {
+                "requests": {
+                  "cpu": 1.0,
+                  "memoryInGB": 1.5
+                }
+              },
+              "ports": [
+                {
+                  "port": 8081
+                }
+              ],
+              "environmentVariables": [
+                {
+                  "name": "SPRING_DATA_MONGODB_URI",
+                  "value": "mongodb://localhost:27017/teleport_tracking?connectTimeoutMS=4000&socketTimeoutMS=4000"
+                },
+                {
+                  "name": "SERVER_TIMEZONE",
+                  "value": "+08:00"
+                }
+              ]
+            }
+          },
+          {
+            "name": "mongodb",
+            "properties": {
+              "image": "mongo:6.0",
+              "resources": {
+                "requests": {
+                  "cpu": 0.5,
+                  "memoryInGB": 1.0
+                }
+              },
+              "ports": [
+                {
+                  "port": 27017
+                }
+              ]
+            }
+          }
+        ],
+        "osType": "Linux",
+        "ipAddress": {
+          "type": "Public",
+          "ports": [
+            {
+              "protocol": "Tcp",
+              "port": 8081
+            },
+            {
+              "protocol": "Tcp",
+              "port": 27017
+            }
+          ]
+        },
+        "restartPolicy": "OnFailure"
+      }
+    }
+  ]
+}
