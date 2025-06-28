@@ -5,8 +5,11 @@ import lombok.Getter;
 @Getter
 public enum TrackingStatus {
   CREATED("CREATED", "Tracking Created"),
-  IN_PROGRESS("IN_PROGRESS", "Tracking In Progress"),
-  COMPLETED("COMPLETED", "Tracking Completed");
+  IN_TRANSIT("IN_TRANSIT", "Tracking In Transit"),
+  DELIVERED("DELIVERED", "Tracking Delivered"),
+  COMPLETED("COMPLETED", "Tracking Completed"),
+  LOST("LOST", "Tracking Lost"),
+  RETURNED("RETURNED", "Tracking Returned");
 
   private final String value;
   private final String description;
