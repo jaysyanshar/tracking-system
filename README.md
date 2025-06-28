@@ -49,7 +49,7 @@ The `TrackingNumberController` provides endpoints for tracking number generation
 #### Generate Next Tracking Number
 
 ```
-GET /api/v1/tracking-numbers/next
+GET /api/v1/tracking-number/next
 ```
 
 Generates a unique tracking number and creates a new tracking record in the database.
