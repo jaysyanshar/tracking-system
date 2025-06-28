@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/teleport_tracking
+      - SERVER_TIMEZONE=+08:00
+    depends_on:
+      - mongodb
+    networks:
+      - teleport-network
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - teleport-network
+    restart: unless-stopped
+
+networks:
+  teleport-network:
+    driver: bridge
+
+volumes:
+  mongodb-data:
