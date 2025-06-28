@@ -4,6 +4,7 @@ import com.teleport.tracking.system.entity.constant.DbCollection;
 import com.teleport.tracking.system.entity.constant.TrackingFields;
 import com.teleport.tracking.system.entity.constant.enumeration.TrackingStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.DecimalMin;
@@ -13,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.Instant;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

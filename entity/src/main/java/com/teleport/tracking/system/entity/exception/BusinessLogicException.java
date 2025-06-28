@@ -11,6 +11,10 @@ public class BusinessLogicException extends RuntimeException {
   private final ResponseCode code;
   private final String message;
 
+  public BusinessLogicException(HttpStatus status, ResponseCode code) {
+    this(status, code, code.getMessage());
+  }
+
   public BusinessLogicException(HttpStatus status, ResponseCode code, String message) {
     super(message);
     this.status = status;

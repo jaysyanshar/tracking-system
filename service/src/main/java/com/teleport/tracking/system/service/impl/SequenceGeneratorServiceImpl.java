@@ -36,7 +36,7 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
 
   @Override
   public Mono<String> generateTrackingNumber() {
-    return Mono.defer(() -> dbSequenceRepository.getNextSequence(DbSequenceKey.TRACKING_NUMBER_KEY)
+    return Mono.defer(() -> dbSequenceRepository.getNextSequence(DbSequenceKey.TRACKING_NUMBER_KEY))
         .map(sequence -> String.format("%s%010d", DbSequenceKey.TRACKING_NUMBER_PREFIX, sequence))
         // Retry logic for concurrency conflicts
         .retryWhen(Retry.backoff(trackingNumberRetryCount, Duration.ofMillis(trackingNumberRetryDelayMs))
@@ -46,9 +46,12 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
                 log.warn("Retrying tracking number generation after concurrency conflict, attempt: {}",
                     retrySignal.totalRetries() + 1)))
         .onErrorResume(e -> {
+          if (e instanceof BusinessLogicException) {
+            return Mono.error(e);
+          }
           log.error("Error generating tracking number after retries", e);
           return Mono.error(new BusinessLogicException(HttpStatus.INTERNAL_SERVER_ERROR,
               ResponseCode.GENERATE_ID_ERROR, e.getMessage()));
-        }));
+        });
   }
 }
