@@ -70,12 +70,13 @@ Generates a unique tracking number and creates a new tracking record in the data
 
 ```json
 {
-  "status": "SUCCESS",
+  "code": "SUCCESS",
+  "message": "Success",
   "data": {
-    "trackingNumber": "TLP1234567890",
-    "createdAt": "2025-06-28T12:34:56+08:00"
+    "tracking_number": "TLP1234567890",
+    "created_at": "2025-01-01T00:00:00+08:00"
   },
-  "errors": null
+  "server_time": "2025-01-01T00:00:00+08:00"
 }
 ```
 
