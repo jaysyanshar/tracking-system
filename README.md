@@ -79,6 +79,26 @@ Generates a unique tracking number and creates a new tracking record in the data
 }
 ```
 
+## Deployed Application
+
+A live instance of this application is currently deployed and available for testing:
+
+### API Endpoints
+
+- **Base URL**: http://4.145.124.75:8081
+- **Swagger UI**: http://4.145.124.75:8081/swagger-ui.html
+- **OpenAPI Docs**: http://4.145.124.75:8081/api-docs
+
+You can use the Swagger UI to explore and test all available API endpoints directly from your browser.
+
+### Sample Request
+
+To generate a tracking number using the deployed application, you can make a GET request to:
+
+```
+http://4.145.124.75:8081/api/v1/tracking-number/next?origin_country_id=MY&destination_country_id=ID&weight=1.234&created_at=2018-11-20T19%3A29%3A32%2B08%3A00&customer_id=de619854-b59b-425e-9db4-943979e1bd49&customer_name=RedBox%20Logistics&customer_slug=redbox-logistics
+```
+
 ## Database Documentation
 
 The application uses MongoDB for data storage. The following collections are used:
