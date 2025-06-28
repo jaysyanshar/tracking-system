@@ -61,10 +61,6 @@
             {
               "protocol": "Tcp",
               "port": 8081
-            },
-            {
-              "protocol": "Tcp",
-              "port": 27017
             }
           ]
         },
